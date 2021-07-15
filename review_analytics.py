@@ -24,3 +24,11 @@ for data in datas:
 	if len(data) <100:
 		new.append(data)
 print('留言小於100字的清單筆數總共有', len(new), '筆')
+
+new_good = []
+
+for data in datas:
+	if 'good' in data:
+		new_good.append(data)
+print('留言裡有good的清單筆數總共有', len(new_good), '筆')
+print(new_good[0])
