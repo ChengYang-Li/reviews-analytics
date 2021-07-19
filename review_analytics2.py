@@ -1,18 +1,25 @@
 # 留言分析程式
-
+import time
+import progressbar
 
 # 讀取檔案
 def read_file(filename):
 	datas = []
+	bar = progressbar.ProgressBar(max_value=1000000)
+	count = 0
 	with open(filename, 'r', encoding='utf-8-sig') as f:
 		for line in f:
 			datas.append(line.strip())
+			count += 1
+			bar.update(count)
+	bar.finish()
 	return datas
 
 
 # 統計字數
 def word_count(datas):
 	#words_list = []
+	s_time = time.time()
 	words = {}
 	for data in datas:
 		#data = data.split(' ')
@@ -31,7 +38,10 @@ def word_count(datas):
 		if words[w] > 1000000:
 			print('超過一百萬的字', w, words[w])
 	print('總共有', len(words), '字可以查')
+	e_time = time.time()
+	print('總共花了', f'{e_time - s_time:.1f}', e_time - s_time, '秒') # 呈現format後的時間與正常時間
 	return words
+
 
 
 #查詢字
@@ -44,7 +54,6 @@ def select(words):
 			print('查無此字，請重新輸入')
 			continue
 		print('你查詢的字', word, '總共出現', words[word], '次')
-
 
 # main
 def main():
